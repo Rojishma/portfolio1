@@ -32,7 +32,7 @@ export function Contact() {
         <SectionHeading
           eyebrow="Contact"
           title="Let's create something together"
-          subtitle="Open to opportunities, collaborations, and friendly chats over coffee ☕"
+          subtitle="Open to opportunities, collaborations, and friendly chats over coffee "
         />
 
         <div className="mx-auto max-w-3xl">

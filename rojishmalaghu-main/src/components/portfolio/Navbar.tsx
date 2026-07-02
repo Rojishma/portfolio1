@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Sparkles } from "lucide-react";
+import { Sparkles, Menu, X } from "lucide-react";
 
 const links = [
   { href: "#about", label: "About" },
@@ -11,6 +11,7 @@ const links = [
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const [open, setOpen] = useState(false);
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", onScroll);
@@ -32,7 +33,18 @@ export function Navbar() {
           </span>
           <span className="text-gradient">Rojishma</span>
         </a>
-        <ul className="hidden items-center gap-8 md:flex">
+        <button
+          aria-label="Toggle navigation"
+          aria-expanded={open}
+          onClick={() => setOpen((s) => !s)}
+          className="inline-flex items-center justify-center rounded-md p-2 text-foreground md:hidden"
+        >
+          {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+        </button>
+        <ul
+          id="nav-links"
+          className={`${open ? "flex flex-col gap-4 absolute right-6 top-16 bg-background/95 p-4 rounded-md shadow-soft md:static md:flex md:flex-row md:gap-8" : "hidden md:flex items-center gap-8"}`}
+        >
           {links.map((l) => (
             <li key={l.href}>
               <a
@@ -46,7 +58,7 @@ export function Navbar() {
         </ul>
         <a
           href="#contact"
-          className="hidden rounded-full gradient-primary px-5 py-2 text-sm font-medium text-primary-foreground shadow-soft transition-smooth hover:shadow-glow hover:scale-105 md:inline-flex"
+          className={`${open ? "inline-flex mt-2 w-full justify-center" : "hidden"} rounded-full gradient-primary px-5 py-2 text-sm font-medium text-primary-foreground shadow-soft transition-smooth hover:shadow-glow hover:scale-105 md:inline-flex`}
         >
           Let's Talk
         </a>
